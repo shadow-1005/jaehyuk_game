@@ -1,0 +1,306 @@
+/* =========================
+   1. 기본 설정
+========================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  background: black;
+  font-family: Arial, sans-serif; /* 글꼴 변경 가능 */
+  color: white;
+}
+
+/* =========================
+   2. 화면 공통
+========================= */
+.screen {
+  display: none;
+  width: 100%;
+  height: 100vh;
+}
+
+.screen.active {
+  display: block;
+}
+
+/* =========================
+   3. 메인 메뉴
+========================= */
+.container {
+  width: 100%;
+  height: 100vh;
+  max-width: 430px;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 45px;
+}
+
+.title-box {
+  width: 95%;
+  height: 90px;
+  border: 4px solid #7a3cff;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.title-box h1 {
+  color: white;
+  font-size: 2rem; /* 제목 크기 변경 가능 */
+  text-align: center;
+}
+
+.menu-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.menu-btn {
+  width: 200px;   /* 버튼 크기 변경 가능 */
+  height: 70px;   /* 버튼 크기 변경 가능 */
+  border-radius: 8px;
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: white;
+  background: transparent;
+  cursor: pointer;
+}
+
+.start-btn {
+  border: 4px solid red;
+}
+
+.credit-btn {
+  border: 4px solid #1e90ff;
+}
+
+/* =========================
+   4. 제작진 팝업
+========================= */
+.modal {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 30;
+}
+
+.hidden {
+  display: none;
+}
+
+.modal-content {
+  width: 80%;
+  max-width: 320px;
+  background-color: #222;
+  border: 3px solid white;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  color: white;
+}
+
+.modal-content h2 {
+  margin-bottom: 15px;
+}
+
+.modal-content p {
+  margin: 8px 0;
+}
+
+#closeModalBtn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  background-color: #1e90ff;
+  color: white;
+  cursor: pointer;
+}
+
+/* =========================
+   5. 게임 화면
+========================= */
+#gameScreen {
+  position: relative;
+  background: black;
+}
+
+.hud {
+  position: absolute;
+  top: 14px;
+  left: 0;
+  width: 100%;
+  padding: 0 14px;
+  z-index: 20;
+  pointer-events: none;
+}
+
+.hud-text {
+  position: absolute;
+  top: 0;
+  font-size: 1.1rem; /* 변경 가능 */
+  font-weight: bold;
+  color: white;
+}
+
+.hud-text.left {
+  left: 14px;
+}
+
+.hud-text.right {
+  right: 14px;
+}
+
+#gameArea {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: black;
+}
+
+#ground {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 3px; /* 바닥 두께 변경 가능 */
+  background: white;
+}
+
+#player {
+  position: absolute;
+  width: 72px;   /* 플레이어 크기 변경 가능 */
+  height: 72px;  /* 플레이어 크기 변경 가능 */
+  object-fit: contain;
+  user-select: none;
+  pointer-events: none;
+  z-index: 15;
+}
+
+/* =========================
+   6. 모바일 조작 버튼
+========================= */
+.mobile-controls {
+  position: absolute;
+  left: 0;
+  bottom: 18px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  z-index: 25;
+}
+
+.control-btn {
+  width: 80px;
+  height: 54px;
+  border: 2px solid white;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  color: white;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.control-btn:active {
+  transform: scale(0.96);
+}
+
+/* =========================
+   7. 공격 시스템
+========================= */
+
+/* 예비모션: 빨간 사각형 */
+.attack-warning {
+  position: absolute;
+  top: 0;
+  background-image: url("pre-atk_1.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.75;
+  pointer-events: none;
+  z-index: 8;
+}
+
+/* 실제 공격 이미지 */
+.attack-hit {
+  position: absolute;
+  pointer-events: none;
+  z-index: 12;
+  object-fit: contain;
+}
+
+/* =========================
+   8. 앞으로 새 기능은 맨 아래 추가
+   예: 장애물, 보스, 아이템, 게임오버창
+========================= */
+
+/* =========================================================
+   추가 기능 - 2단계 쓸기 공격
+========================================================= */
+
+/* 예비공격 모션: 화면 전체 빨간 영역 */
+.sweep-warning {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  background-image: url("pre-atk_2.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  pointer-events: none;
+  z-index: 9;
+  animation: sweepWarningBlink 0.22s infinite alternate;
+}
+
+/* 예비공격 안에서만 실제 공격이 움직이도록 하는 범위 */
+.sweep-attack-lane {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  overflow: hidden; /* 공격이 빨간 사각형 밖으로 안 나가게 함 */
+  pointer-events: none;
+  z-index: 11;
+}
+
+/* 실제 쓸기 공격 이미지 */
+.sweep-attack-hit {
+  position: absolute;
+  left: 0;
+  object-fit: contain;
+  pointer-events: none;
+  z-index: 12;
+}
+
+/* 예비공격 깜빡임 */
+@keyframes sweepWarningBlink {
+  0% {
+    opacity: 0.45;
+  }
+  100% {
+    opacity: 0.9;
+  }
+}
